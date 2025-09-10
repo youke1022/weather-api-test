@@ -4,9 +4,15 @@ pipeline {
         stage('拉取GitHub代码') {
             steps {
                 script {
-                    echo "从GitHub拉取api-test代码..."
-                    bat ''' git clone https://github.com/youke1022/weather-api-test %WORKSPACE% '''
-                    echo "代码拉取完成，api-test文件夹已复制到工作空间"
+                    echo "检查api-test目录是否存在..."
+                    // 使用Jenkins内置的fileExists步骤判断目录是否存在（相对路径基于WORKSPACE）
+                    if (fileExists('api-test')) {
+                        echo "api-test目录已存在，跳过克隆环节"
+                    } else {
+                        echo "api-test目录不存在，开始克隆GitHub代码..."
+                        bat ''' git clone https://github.com/youke1022/weather-api-test %WORKSPACE% '''
+                        echo "代码拉取完成，api-test文件夹已复制到工作空间"
+                    }
                 }
             }
         }
