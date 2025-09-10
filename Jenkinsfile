@@ -19,8 +19,6 @@ pipeline {
         stage('创建并启动api-test容器') {
             steps {
                 script {
-                    echo "停止并删除已存在的api-test容器（如果存在）..."
-                    bat ''' docker stop api-test || true && docker rm api-test || true '''
                     echo "创建并启动api-test容器..."
                     bat ''' docker run -d ^
                         --name api-test ^
