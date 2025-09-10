@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]  # 核心配置：将项目根目录添加到Python路径
+testpaths = ["tests"]
+addopts = "-v"      # 默认显示详细输出

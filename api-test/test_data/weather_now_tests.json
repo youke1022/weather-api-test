@@ -1,0 +1,32 @@
+[
+  {
+    "name": "valid_location_id",
+    "description": "使用有效的LocationID查询实时天气",
+    "params": {
+      "location": "101010100"
+    },
+    "expected_code": "200"
+  },
+  {
+    "name": "valid_coordinates",
+    "description": "使用经纬度坐标查询实时天气",
+    "params": {
+      "location": "116.41,39.92"
+    },
+    "expected_code": "200"
+  },
+  {
+    "name": "invalid_location",
+    "description": "使用无效的LocationID查询",
+    "params": {
+      "location": "999999999"
+    },
+    "expected_code": "400"
+ },
+ {
+   "name": "missing_location",
+   "description": "缺失location参数",
+   "params": {},
+   "expected_code": "400"
+ }
+]
