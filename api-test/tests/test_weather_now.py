@@ -34,7 +34,7 @@ def test_weather_now_simple(api_client: WeatherAPIClient, test_case: Dict[str, A
 
     # 2. 对于失败用例，断言错误消息存在
     if test_case["expected_code"] != "200":
-        assert "error" in response["data"], \
+        assert "arror" in response["data"], \
             f"测试用例 [{test_case['name']}] 失败但未返回错误信息"
         assert "detail" in response["data"]["error"], \
             f"测试用例 [{test_case['name']}] 失败但未返回详细错误原因"
@@ -42,4 +42,5 @@ def test_weather_now_simple(api_client: WeatherAPIClient, test_case: Dict[str, A
 
 
 if __name__ == "__main__":
+
     pytest.main([__file__, "-v"])
