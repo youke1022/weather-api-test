@@ -66,15 +66,14 @@ pipeline {
                 }
             }
         }
-        
-        stage('安装依赖并执行 pytest') {
+         stage('安装依赖并执行pytest') {
             steps {
                 script {
                     echo "进入容器并安装依赖..."
-                    bat "docker exec api-test sh -c \\\"pip install -r /app/requirement.txt\\\""
-                    echo "依赖安装完成，执行 pytest 测试..."
-                    bat "docker exec api-test sh -c \\\"cd /app && pytest\\\""
-                    echo "pytest 执行完成"
+                    bat "docker exec api-test sh -c \"pip install -r /app/requirement.txt\""
+                    echo "依赖安装完成，执行pytest测试..."
+                    bat "docker exec api-test sh -c \"cd /app && pytest\""
+                    echo "pytest执行完成"
                 }
             }
         }
