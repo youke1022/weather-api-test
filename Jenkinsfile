@@ -22,7 +22,7 @@ pipeline {
         stage('检查/创建并启动 api-test 容器') {
             steps {
                 script {
-                    echo "检查是否已有名为 api-test 的 Docker 容器....
+                    echo "检查是否已有名为 api-test 的 Docker 容器..."
                     def containerName = bat(script: 'docker ps -a --filter "name=api-test" --format "{{.Name}}"', returnStdout: true).trim()
                     if (containerName.contains("api-test")) {
                         echo "✅ 检测到同名容器 '${containerName}' 已存在，跳过容器创建，直接进入容器执行后续操作"
