@@ -22,19 +22,17 @@ pipeline {
         stage('检查/创建并启动 api-test 容器') {
             steps {
                 script {
-                    echo "检查是否已有名为 api-test 的 Docker 容器..."
-                    // 检查容器是否存在（docker ps -a | findstr "api-test"）
-                    def containerExists = bat(script: 'docker ps -a --filter "name=api-test" --format "{{.Names}}"', returnStdout: true).trim()
-                    
-                    if (containerExists == "api-test") {
-                        echo "✅ 检测到同名容器 'api-test' 已存在，跳过容器创建，直接进入容器执行后续操作"
+                    echo "检查是否已有名为 api-test 的 Docker 容器....
+                    def containerName = bat(script: 'docker ps -a --filter "name=api-test" --format "{{.Name}}"', returnStdout: true).trim()
+                    if (containerName.contains("api-test")) {
+                        echo "✅ 检测到同名容器 '${containerName}' 已存在，跳过容器创建，直接进入容器执行后续操作"
                     } else {
                         echo "❌ 未检测到名为 'api-test' 的容器，正在创建并启动..."
                         bat '''
-                            docker run -d ^
-                                --name api-test ^
-                                -v %WORKSPACE%\\api-test:/app ^
-                                python:3.9-slim ^
+                            docker run -d \
+                                --name api-test \
+                                -v %WORKSPACE%\\api-test:/app \
+                                python:3.9-slim \
                                 tail -f /dev/null
                         '''
                         echo "✅ 容器 'api-test' 启动成功，api-test 文件夹已挂载到 /app 目录"
