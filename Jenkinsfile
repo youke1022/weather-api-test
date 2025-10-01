@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        docker 'docker1' // 使用已配置的Docker工具
+        dockerTool 'docker1' // 使用已配置的Docker工具
     }
     
     parameters {
